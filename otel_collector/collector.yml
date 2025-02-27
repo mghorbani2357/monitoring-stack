@@ -16,7 +16,7 @@ exporters:
   prometheus:
     endpoint: "0.0.0.0:9464"
 
-  tempo:
+  otlp/tempo:
     endpoint: "http://tempo:4317"
     tls:
       insecure: true
@@ -25,12 +25,12 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [tempo, debug]
+      exporters: [otlp/tempo, debug]
 
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [prometheus, tempo, debug]
+      exporters: [prometheus, otlp/tempo, debug]
 
     logs:
       receivers: [otlp]
