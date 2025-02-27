@@ -1,7 +1,7 @@
 services:
   otel_collector:
     image: otel/opentelemetry-collector:latest
-    container_name: otel-collector
+    container_name: otel_collector
     restart: unless-stopped
     user: "0:0"
     volumes:
