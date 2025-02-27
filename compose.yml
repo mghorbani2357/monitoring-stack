@@ -57,8 +57,8 @@ services:
 
   tempo:
     extends:
-      file: grafana/compose.yml
-      service: grafana
+      file: tempo/compose.yml
+      service: tempo
       ports:
         - "3200:3200"
       networks:
