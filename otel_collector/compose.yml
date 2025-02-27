@@ -1,0 +1,14 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    container_name: otel-collector
+    restart: unless-stopped
+    volumes:
+      - ./collector.yml:/etc/otel/config.yaml
+      - ./data:/var/lib/otel-data
+    command:
+      "--config=/etc/otel/config.yml"
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+    labels:
+      org.label-schema.group: "monitoring"

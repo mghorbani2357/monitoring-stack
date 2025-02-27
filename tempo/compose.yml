@@ -1,0 +1,12 @@
+services:
+  tempo:
+    image: grafana/tempo:latest
+    container_name: tempo
+    restart: unless-stopped
+    command:
+      - "-config.file=/etc/tempo.yml"
+    volumes:
+      - ./tempo.yml:/etc/tempo.yml
+      - ./data:/var/lib/tempo
+    labels:
+      org.label-schema.group: "monitoring"

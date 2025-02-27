@@ -1,0 +1,19 @@
+server:
+  http_listen_port: 7200
+
+storage:
+  type: local
+  local:
+    path: /mimir/data
+
+ring:
+  kvstore:
+    store: inmemory
+  replication_factor: 1
+
+distributor:
+  shard_by_all_labels: true
+
+ingester:
+  lifecycler:
+    join_after: 0s

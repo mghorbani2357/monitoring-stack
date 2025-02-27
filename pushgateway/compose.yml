@@ -1,0 +1,10 @@
+services:
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: pushgateway
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    command: --persistence.file="/data/metric.store"
+    labels:
+      org.label-schema.group: "monitoring"
