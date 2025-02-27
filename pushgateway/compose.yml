@@ -3,6 +3,7 @@ services:
     image: prom/pushgateway:latest
     container_name: pushgateway
     restart: unless-stopped
+    user: "0:0"
     volumes:
       - ./data:/data
     command: --persistence.file="/data/metric.store"

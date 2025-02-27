@@ -3,6 +3,7 @@ services:
     image: grafana/tempo:latest
     container_name: tempo
     restart: unless-stopped
+    user: "0:0"
     command:
       - "-config.file=/etc/tempo.yml"
     volumes:

@@ -3,6 +3,7 @@ services:
     image: grafana/mimir:latest
     container_name: mimir
     restart: always
+    user: "0:0"
     volumes:
       - ./mimir-config.yaml:/etc/mimir-config.yaml:ro
       - ./mimir-data:/mimir
