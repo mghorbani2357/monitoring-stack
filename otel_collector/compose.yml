@@ -1,5 +1,5 @@
 services:
-  otel-collector:
+  otel_collector:
     image: otel/opentelemetry-collector:latest
     container_name: otel-collector
     restart: unless-stopped
