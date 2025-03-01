@@ -1,19 +1,42 @@
-server:
-  http_listen_port: 7200
+multitenancy_enabled: false
 
-storage:
-  type: local
-  local:
-    path: /mimir/data
+blocks_storage:
+  backend: filesystem
+  bucket_store:
+    sync_dir: /mimir/tsdb-sync
+  filesystem:
+    dir: /mimir/data/tsdb
+  tsdb:
+    dir: /mimir/tsdb
 
-ring:
-  kvstore:
-    store: inmemory
-  replication_factor: 1
+compactor:
+  data_dir: /mimir/compactor
+  sharding_ring:
+    kvstore:
+      store: memberlist
 
 distributor:
-  shard_by_all_labels: true
+  ring:
+    instance_addr: 0.0.0.0
+    kvstore:
+      store: memberlist
 
 ingester:
-  lifecycler:
-    join_after: 0s
+  ring:
+    instance_addr: 0.0.0.0
+    kvstore:
+      store: memberlist
+    replication_factor: 1
+
+ruler_storage:
+  backend: filesystem
+  filesystem:
+    dir: /mimir/rules
+
+server:
+  http_listen_port: 9009
+  log_level: error
+
+store_gateway:
+  sharding_ring:
+    replication_factor: 1
