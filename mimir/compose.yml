@@ -2,11 +2,11 @@ services:
   mimir:
     image: grafana/mimir:latest
     container_name: mimir
-    restart: always
+    restart: unless-stopped
     user: "0:0"
     volumes:
-      - ./mimir-config.yaml:/etc/mimir-config.yaml:ro
-      - ./mimir-data:/mimir
+      - ./mimir.yaml:/etc/mimir-config.yaml:ro
+      - ./data:/mimir
     ports:
       - "7200:7200"  # Mimir HTTP API
     command: ["-config.file=/etc/mimir-config.yaml"]
