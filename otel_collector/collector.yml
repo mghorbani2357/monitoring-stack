@@ -23,10 +23,6 @@ exporters:
 
   otlphttp:
     endpoint: "http://loki:3100/otlp"
-    labels:
-      resource: "service.name"
-      attributes: "level"
-    format: json
 
 service:
   pipelines:
