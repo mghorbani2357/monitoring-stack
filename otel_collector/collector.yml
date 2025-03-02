@@ -22,7 +22,7 @@ exporters:
       insecure: true
 
   otlphttp:
-    endpoint: "http://loki:3100/loki/api/v1/push"
+    endpoint: "http://loki:3100/otlp"
     labels:
       resource: "service.name"
       attributes: "level"
