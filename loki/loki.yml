@@ -2,8 +2,6 @@ auth_enabled: false
 
 server:
   http_listen_port: 3100
-  http_grpc_read_timeout: 5s
-  http_grpc_write_timeout: 10s
   grpc_listen_port: 9096
   log_level: debug
   grpc_server_max_concurrent_streams: 1000

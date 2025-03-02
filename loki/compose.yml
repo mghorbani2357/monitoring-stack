@@ -8,3 +8,5 @@ services:
       - ./loki.yaml:/etc/loki-config.yaml:ro
       - ./data:/loki
     command: ["-config.file=/etc/loki-config.yaml"]
+    labels:
+      org.label-schema.group: "monitoring"
