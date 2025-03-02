@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     user: "0:0"
     volumes:
-      - ./mimir.yaml:/etc/mimir-config.yaml:ro
+      - ./mimir.yml:/etc/mimir-config.yml:ro
       - ./data:/mimir
-    ports:
-      - "7200:7200"  # Mimir HTTP API
-    command: ["-config.file=/etc/mimir-config.yaml"]
+    command: ["-config.file=/etc/mimir-config.yml"]
+    labels:
+      org.label-schema.group: "monitoring"

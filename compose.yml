@@ -77,15 +77,15 @@ services:
         monitoring:
           ipv4_address: "10.10.0.7"
 
-#  mimir:
-#    extends:
-#      file: mimir/compose.yml
-#      service: mimir
-#      ports:
-#        - "7200:7200"  # Mimir HTTP API
-#      networks:
-#        monitoring:
-#          ipv4_address: "10.10.0.8"
+  mimir:
+    extends:
+      file: mimir/compose.yml
+      service: mimir
+      ports:
+        - "7200:7200"  # Mimir HTTP API
+      networks:
+        monitoring:
+          ipv4_address: "10.10.0.8"
 
   grafana:
     extends:
