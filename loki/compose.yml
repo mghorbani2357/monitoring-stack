@@ -5,8 +5,8 @@ services:
     restart: always
     user: "0:0"
     volumes:
-      - ./loki.yaml:/etc/loki-config.yaml:ro
+      - ./loki.yml:/etc/loki-config.yml:ro
       - ./data:/loki
-    command: ["-config.file=/etc/loki-config.yaml"]
+    command: ["-config.file=/etc/loki-config.yml"]
     labels:
       org.label-schema.group: "monitoring"
