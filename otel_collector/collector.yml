@@ -20,12 +20,20 @@ exporters:
     endpoint: "http://tempo:4317"
     tls:
       insecure: true
+
+  loki:
+    endpoint: "http://loki:3100/loki/api/v1/push"
+    labels:
+      resource: "service.name"
+      attributes: "level"
+    format: json
+
 service:
   pipelines:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tempo, debug]
+      exporters: [otlp/tempo, debug, loki]
 
     metrics:
       receivers: [otlp]
@@ -35,4 +43,4 @@ service:
     logs:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug]
+      exporters: [loki, debug]
