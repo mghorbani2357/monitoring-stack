@@ -21,7 +21,7 @@ exporters:
     tls:
       insecure: true
 
-  loki:
+  otlp/loki:
     endpoint: "http://loki:3100/loki/api/v1/push"
     labels:
       resource: "service.name"
@@ -33,7 +33,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tempo, debug, loki]
+      exporters: [otlp/tempo, debug, otlp/loki]
 
     metrics:
       receivers: [otlp]
@@ -43,4 +43,4 @@ service:
     logs:
       receivers: [otlp]
       processors: [batch]
-      exporters: [loki, debug]
+      exporters: [otlp/loki, debug]
