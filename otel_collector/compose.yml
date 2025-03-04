@@ -9,7 +9,7 @@ services:
       - ./data:/var/lib/otel-data
     command:
       "--config=/etc/otel-collector-config.yml"
-#    environment:
-#      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel_collector:4317
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${OTEL_EXPORTER_ENDPOINT:http://otel_collector:4317}
     labels:
       org.label-schema.group: "monitoring"

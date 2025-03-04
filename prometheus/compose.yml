@@ -12,6 +12,6 @@ services:
       - "--web.enable-remote-write-receiver"
       - "--enable-feature=native-histograms"
       - "--storage.tsdb.path=/prometheus"
-      - "--storage.tsdb.retention.time=30d"
+      - "--storage.tsdb.retention.time=${PROMETHEUS_STORAGE_TSDB_RETENTION_TIME:-30d}"
     labels:
       org.label-schema.group: "monitoring"

@@ -5,11 +5,21 @@ services:
     restart: unless-stopped
     user: "0:0"
     environment:
-      - GF_SECURITY_ADMIN_USER=${GF_ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${GF_ADMIN_PASSWORD:-admin}
-      - GF_FEATURE_TOGGLES_TRACE_SERVICE_GRAPH=true
-      - GF_USERS_ALLOW_SIGN_UP=false
-#      - GF_SERVER_ROOT_URL=${GF_BASE_URL}
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD:-admin}
+      - GF_FEATURE_TOGGLES_TRACE_SERVICE_GRAPH=${GF_FEATURE_TOGGLES_TRACE_SERVICE_GRAPH:-true}
+      - GF_ANALYTICS_REPORTING_ENABLED=${GF_ANALYTICS_REPORTING_ENABLED:false}
+      - GF_AUTH_ANONYMOUS_ENABLED:${GF_AUTH_ANONYMOUS_ENABLED:-false}
+      - GF_LOG_LEVEL=${GF_LOG_LEVEL:-info}
+      - GF_USERS_ALLOW_SIGN_UP=${GF_AUTH_ANONYMOUS_ENABLED:-false}
+      - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
+      - GF_SMTP_ENABLED=${GF_SMTP_ENABLED}
+      - GF_SMTP_HOST=${GF_SMTP_HOST}
+      - GF_SMTP_USER=${GF_SMTP_USER}
+      - GF_SMTP_PASSWORD=${GF_SMTP_PASSWORD}
+      - GF_SMTP_FROM_ADDRESS=${GF_SMTP_FROM_ADDRESS}
+      - GF_SMTP_FROM_NAME=${GF_SMTP_FROM_NAME}
+      - GF_SMTP_SKIP_VERIFY=${GF_SMTP_SKIP_VERIFY:-false}
     volumes:
       - ./data:/var/lib/grafana:rw  # Persistent storage for Grafana data
       - ./config:/etc/grafana:ro    # Persistent storage for Grafana configuration

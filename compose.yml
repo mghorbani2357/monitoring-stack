@@ -21,22 +21,20 @@ services:
     extends:
       file: prometheus/compose.yml
       service: prometheus
-    ports:
-      - "9090:9090"
     depends_on:
       - pushgateway
     networks:
       monitoring:
         ipv4_address: "10.10.0.3"
+
   alertmanager:
     extends:
       file: ./alertmanager/compose.yml
       service: alertmanager
-    ports:
-      - "9093:9093"
     networks:
       monitoring:
         ipv4_address: "10.10.0.4"
+
   otel_collector:
     extends:
       file: otel_collector/compose.yml
@@ -54,12 +52,11 @@ services:
     networks:
       monitoring:
         ipv4_address: "10.10.0.5"
+
   loki:
     extends:
       file: loki/compose.yml
       service: loki
-    ports:
-      - "3100:3100"  # Loki HTTP API
     networks:
       monitoring:
         ipv4_address: "10.10.0.6"
@@ -68,24 +65,12 @@ services:
     extends:
       file: tempo/compose.yml
       service: tempo
-    ports:
-      - "3200:3200"
     depends_on:
       - otel_collector
       - loki
     networks:
       monitoring:
         ipv4_address: "10.10.0.7"
-
-  mimir:
-    extends:
-      file: mimir/compose.yml
-      service: mimir
-    ports:
-      - "7200:7200"  # Mimir HTTP API
-    networks:
-      monitoring:
-        ipv4_address: "10.10.0.8"
 
   grafana:
     extends:
@@ -98,3 +83,16 @@ services:
     networks:
       monitoring:
         ipv4_address: "10.10.0.9"
+
+
+  postgres_exporter:
+    image: wrouesnel/postgres_exporter:latest
+    container_name: postgres_exporter
+    environment:
+      DATA_SOURCE_NAME: postgres://user:password@postgres:5432/mydatabase?sslmode=disable
+    ports:
+      - "9187:9187"  # Exporter's port for Prometheus to scrape
+    networks:
+      - monitoring
+    depends_on:
+      - postgres
