@@ -83,16 +83,3 @@ services:
     networks:
       monitoring:
         ipv4_address: "10.10.0.9"
-
-
-  postgres_exporter:
-    image: wrouesnel/postgres_exporter:latest
-    container_name: postgres_exporter
-    environment:
-      DATA_SOURCE_NAME: postgres://user:password@postgres:5432/mydatabase?sslmode=disable
-    ports:
-      - "9187:9187"  # Exporter's port for Prometheus to scrape
-    networks:
-      - monitoring
-    depends_on:
-      - postgres
