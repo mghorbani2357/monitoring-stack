@@ -1,0 +1,15 @@
+services:
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    network_mode: "host"
+    command:
+      - '--collector.textfile.directory=/host/textfile_collector'  # Example custom collector directory
+    volumes:
+      - '/proc:/host/proc:ro'      # CPU, memory, and process stats
+      - '/sys:/host/sys:ro'        # System information
+      - '/var/lib:/host/var/lib:ro'  # Persistent data directories
+      - '/run:/host/run:ro'        # Runtime info (useful for some metrics)
+      - '/etc/hostname:/host/etc/hostname:ro'  # Hostname info
+      - '/etc/os-release:/host/etc/os-release:ro'  # OS info
