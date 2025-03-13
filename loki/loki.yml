@@ -5,7 +5,13 @@ server:
   grpc_listen_port: 9096
   log_level: debug
   grpc_server_max_concurrent_streams: 1000
-
+compactor:
+  block_retention: 3GB
+  compaction_interval: 10m
+  delete_request_store: filesystem
+  retention_delete_delay: 1h
+  retention_enabled: true
+  
 common:
   instance_addr: 0.0.0.0
   path_prefix: /loki
@@ -27,6 +33,7 @@ query_range:
 
 limits_config:
   metric_aggregation_enabled: true
+  retention_period: 0s
 
 schema_config:
   configs:
