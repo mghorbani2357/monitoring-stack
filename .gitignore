@@ -1,0 +1,9 @@
+alertmanager/data
+grafana/data
+loki/data
+otel_collector/data
+prometheus/data
+pushgateway/data
+tempo/data
+
+.env
